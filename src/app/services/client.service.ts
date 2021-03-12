@@ -30,4 +30,8 @@ newClient(client: Client) {
   this.clientsCollection.add(client);
 }
 
+getClient(id: string): Observable<Client> {
+     return this.clientsCollection.doc(id).valueChanges();
+}
+
 }
