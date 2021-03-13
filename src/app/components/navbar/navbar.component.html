@@ -5,16 +5,22 @@
     </button>
     <div class="collapse navbar-collapse" id="collapsibleNavId">
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-            <li class="nav-item active">
+            <li class="nav-item active" *ngIf="isLoggedIn">
                 <a class="nav-link" routerLink="/">Dashboard <span class="sr-only">(current)</span></a>
             </li>
         </ul>
         <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
+            <li class="nav-item" *ngIf="!isLoggedIn">
                 <a routerLink="/register" class="nav-link">Register</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" *ngIf="!isLoggedIn">
                 <a routerLink="/login" class="nav-link">Login</a>
+            </li>
+            <li class="nav-item" *ngIf="isLoggedIn">
+                <a routerLink="/login" class="nav-link">{{ userLoggedIn }}</a>
+            </li>
+            <li class="nav-item" *ngIf="isLoggedIn">
+                <a (click)="onLogout()" class="nav-link">LogOut</a>
             </li>
         </ul>
     </div>

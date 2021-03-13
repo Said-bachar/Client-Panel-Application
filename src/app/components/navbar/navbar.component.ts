@@ -1,3 +1,6 @@
+import { Router } from '@angular/router';
+import { FlashMessagesService } from 'angular2-flash-messages';
+import { AuthClientService } from './../../services/auth-client.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,10 +9,29 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-
-  constructor() { }
+  
+  isLoggedIn: boolean = false;
+  userLoggedIn: string;
+  constructor(
+    private authService: AuthClientService,
+    private flashMessage: FlashMessagesService,
+    private router: Router
+    ) { }
 
   ngOnInit(): void {
+    this.authService.getAuth().subscribe(auth => {
+      if(auth) {
+        this.isLoggedIn = true;
+        this.userLoggedIn = auth.email;
+      } else {
+         this.isLoggedIn = false;
+      }
+   })
+  }
+  onLogout() {
+    this.authService.logout();
+    return this.router.navigate(['/login']);
+    //this.flashMessage.show('', { cssClass: 'alert-success', timeout: 3000 });
   }
 
 }

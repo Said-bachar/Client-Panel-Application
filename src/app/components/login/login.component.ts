@@ -18,11 +18,11 @@ export class LoginComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-    // this.authService.getAuth().subscribe(auth => {
-    //    if(auth) {
-    //      return this.router.navigate(['/']);
-    //    }
-    // })
+    this.authService.getAuth().subscribe(auth => {
+       if(auth) {
+         return this.router.navigate(['/']);
+       }
+    })
   }
 
   onLogin() {
