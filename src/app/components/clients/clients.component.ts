@@ -1,3 +1,4 @@
+import { AuthClientService } from './../../services/auth-client.service';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { Router } from '@angular/router';
 import { Client } from './../../models/client';
@@ -15,16 +16,19 @@ export class ClientsComponent implements OnInit {
   total: number = 0;
   constructor(
      private clientService: ClientService,
+     private authClientService: AuthClientService,
      private router: Router,
      private flashMessage: FlashMessagesService
     ) { }
 
   ngOnInit(): void {
-     this.clientService.getClients().subscribe(clients => {
-       this.clients = clients;
-       console.log(clients);
-       this.total = this.getTotal();
+    this.authClientService.getAuth().subscribe(auth => {
+      this.clientService.getClients(auth.uid).subscribe(clients => {
+        this.clients = clients;
+        this.total = this.getTotal();
+     })
     });
+     
   }
 
   getTotal() {
