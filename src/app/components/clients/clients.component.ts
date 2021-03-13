@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Client } from './../../models/client';
 import { ClientService } from './../../services/client.service';
 import { Component, OnInit } from '@angular/core';
-
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-clients',
   templateUrl: './clients.component.html',
@@ -34,12 +34,29 @@ export class ClientsComponent implements OnInit {
   }
 
   deleteClient(id: string) {
-    if(confirm('Are sure to delete this client?')) {
-      this.clientService.deleteClient(id);
-      this.flashMessage.show('Client deleted successfully.',  {cssClass: 'alert-danger', timeout: 3000});
-      this.router.navigate(['/']);
-     }
     
+    Swal.fire({
+      title: 'Are you sure to delete this client?',
+      text: 'You will not be able to recover it!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, keep it'
+    }).then((result) => {
+      if (result.value) {
+        this.clientService.deleteClient(id);
+        this.flashMessage.show('Client deleted successfully.',  {cssClass: 'alert-danger', timeout: 3000});
+        this.router.navigate(['/']);
+
+        Swal.fire({
+          title: 'Deleted',
+          text: 'This client is deleted!',
+          icon: 'success',
+          timer: 2000 
+        })
+      
+      } 
+    })  
   }
 
 }
