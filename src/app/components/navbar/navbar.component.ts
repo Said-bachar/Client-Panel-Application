@@ -14,7 +14,6 @@ export class NavbarComponent implements OnInit {
   userLoggedIn: string;
   constructor(
     private authService: AuthClientService,
-    private flashMessage: FlashMessagesService,
     private router: Router
     ) { }
 
@@ -30,8 +29,8 @@ export class NavbarComponent implements OnInit {
   }
   onLogout() {
     this.authService.logout();
+    this.isLoggedIn = false;
     return this.router.navigate(['/login']);
-    //this.flashMessage.show('', { cssClass: 'alert-success', timeout: 3000 });
   }
 
 }

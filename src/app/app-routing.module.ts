@@ -1,3 +1,4 @@
+import { AuthGuardGuard } from './guards/auth-guard.guard';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { DetailsClientComponent } from './components/details-client/details-client.component';
@@ -10,18 +11,19 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router'
 
 const routes: Routes = [
-    { path: "", component: DashboardComponent },
+    { path: "", component: DashboardComponent, canActivate: [AuthGuardGuard] },
     { path: "login", component: LoginComponent },
     { path: "register", component: RegisterComponent },
-    { path: "client/add", component: AddClientComponent },
-    { path: "client/edit/:id", component: EditClientComponent },
-    { path: "client/:id", component: DetailsClientComponent },
-    { path: "settings", component: SettingsComponent },
+    { path: "client/add", component: AddClientComponent, canActivate: [AuthGuardGuard] },
+    { path: "client/edit/:id", component: EditClientComponent, canActivate: [AuthGuardGuard] },
+    { path: "client/:id", component: DetailsClientComponent, canActivate: [AuthGuardGuard] },
+    { path: "settings", component: SettingsComponent, canActivate: [AuthGuardGuard] },
     { path: "**", component: NotFoundComponent },
 ];
 
 @NgModule({
    imports: [RouterModule.forRoot(routes)],
-   exports: [RouterModule]
+   exports: [RouterModule],
+   providers: [AuthGuardGuard]
 })
 export class AppRoutingModule{}

@@ -1,1 +1,25 @@
-<p>register works!</p>
+<div class="row mt-4">
+    <div class="col-md-6 mx-auto">
+        <div class="card">
+            <div class="card-body">
+                <h1 class="text-center">
+                    <span class="text-success">
+                       <i class="fa fa-lock" aria-hidden="true"></i> Register Pnael
+                    </span>Client
+                </h1>
+
+                <form (ngSubmit)="onRegister()">
+                    <div class="form-group">
+                        <label for="">Email</label>
+                        <input type="email" class="form-control" name="email" [(ngModel)]="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="">Password</label>
+                        <input type="password" class="form-control" name="password" [(ngModel)]="password">
+                    </div>
+                    <input type="submit" value="Register" class="btn btn-success btn-block">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
