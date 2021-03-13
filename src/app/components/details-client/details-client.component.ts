@@ -1,7 +1,7 @@
 import { Client } from './../../models/client';
 import { ClientService } from './../../services/client.service';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FlashMessagesService } from 'angular2-flash-messages';
 
 @Component({
@@ -18,6 +18,7 @@ export class DetailsClientComponent implements OnInit {
   constructor(
     private clientService: ClientService,
     private route: ActivatedRoute,
+    private router: Router,
     private flashMessage: FlashMessagesService
     ) { }
 
@@ -34,6 +35,15 @@ export class DetailsClientComponent implements OnInit {
     this.clientService.updateClient(this.client);
     this.flashMessage.show('Balance updated successfully.',  {cssClass: 'alert-warning', timeout: 3000});
     this.showBalance = false;
+  }
+
+  deleteClient(id: string) {
+    if(confirm('Are sure to delete this client?')) {
+      this.clientService.deleteClient(id);
+      this.flashMessage.show('Client deleted successfully.',  {cssClass: 'alert-danger', timeout: 3000});
+      this.router.navigate(['/']);
+     }
+    
   }
 
 }

@@ -7,7 +7,7 @@
             <button class="btn btn-danger" routerLink="/client/edit/{{ id }}">
                 <i class="fa fa-pencil" aria-hidden="true"></i> Edit
             </button>
-            <button class="btn btn-dark">
+            <button class="btn btn-dark" (click)="deleteClient(id)">
                 <i class="fa fa-trash" aria-hidden="true"></i> Delete
             </button>
         </div>

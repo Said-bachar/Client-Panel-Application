@@ -39,4 +39,9 @@ updateClient(client: Client) {
   this.clientsDocument.update(client);
 }
 
+deleteClient(id: string) {
+  this.clientsDocument = this.clientsCollection.doc(id);
+  this.clientsDocument.delete();
+}
+
 }
