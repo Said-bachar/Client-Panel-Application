@@ -4,7 +4,7 @@
     </div>
     <div class="col md-6">
         <div class="btn-group pull-right">
-            <button class="btn btn-danger">
+            <button class="btn btn-danger" routerLink="/client/edit/{{ id }}">
                 <i class="fa fa-pencil" aria-hidden="true"></i> Edit
             </button>
             <button class="btn btn-dark">
@@ -25,10 +25,20 @@
                 </ul>
             </div>
             <div class="col md-4 text-right">
-                Balance <button class="btn btn-success">
+                <span class="h5">Balance </span><button class="btn btn-success" (click)="showBalance = !showBalance">
                   <i class="fa fa-pencil" aria-hidden="true"></i>  
                 </button>
-                <h4>{{ client.balance | currency:'USD':'symbol' }}</h4>
+                <h4 [ngClass]="{ 'text-danger': showBalance, 'text-success': !showBalance }">{{ client.balance | currency:'USD':'symbol' }}</h4>
+                <div *ngIf="showBalance">
+                    <form (submit)="onSubmit()">
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="clientBalance" [(ngModel)]="client.balance">
+                            <div class="btn-group">
+                                <button type="submit" class="btn btn-warning">Update</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

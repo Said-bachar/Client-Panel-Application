@@ -34,4 +34,9 @@ getClient(id: string): Observable<Client> {
      return this.clientsCollection.doc(id).valueChanges();
 }
 
+updateClient(client: Client) {
+  this.clientsDocument = this.clientsCollection.doc(client.id);
+  this.clientsDocument.update(client);
+}
+
 }

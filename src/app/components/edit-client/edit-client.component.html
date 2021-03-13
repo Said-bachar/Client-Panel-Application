@@ -1,1 +1,67 @@
-<p>edit-client works!</p>
+<div class="row m-3">
+    <div class="col-md-12">
+        <a routerLink="/"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Back to dashboard</a>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <i class="fa fa-user" aria-hidden="true"></i> Edit Client
+            </div>
+            <div class="card-body">
+                <form #formClient="ngForm" (ngSubmit)="onSubmit()">
+                    <div class="form-group">
+                        <label for="">First Name</label>
+                        <input type="text" class="form-control" name="firstName" [(ngModel)]="client.firstName" #clientFirstName="ngModel" required minlength="3" [ngClass]="{'is-invalid': clientFirstName.errors && clientFirstName.touched}">
+                        <div [hidden]="!clientFirstName.errors?.required" class="invalid-feedback">
+                            First name is required !
+                        </div>
+                        <div [hidden]="!clientFirstName.errors?.minlength" class="invalid-feedback">
+                            Must be at least 3 characters !
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Last Name</label>
+                        <input type="text" class="form-control" name="lastName" [(ngModel)]="client.lastName" #clientLastName="ngModel" required minlength="3" [ngClass]="{'is-invalid': clientLastName.errors && clientLastName.touched}">
+                        <div [hidden]="!clientLastName.errors?.required" class="invalid-feedback">
+                            Last name is required !
+                        </div>
+                        <div [hidden]="!clientLastName.errors?.minlength" class="invalid-feedback">
+                            Must be at least 3 characters !
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="">Email</label>
+                        <input type="email" class="form-control" name="email" [(ngModel)]="client.email" #clientEmail="ngModel" required minlength="3" [ngClass]="{'is-invalid': clientEmail.errors && clientEmail.touched}">
+                        <div [hidden]="!clientEmail.errors?.required" class="invalid-feedback">
+                            Email is required !
+                        </div>
+                        <div [hidden]="!clientEmail.errors?.minlength" class="invalid-feedback">
+                            Must be at least 3 characters !
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Phone</label>
+                        <input type="text" class="form-control" name="phone" [(ngModel)]="client.phone" #clientPhone="ngModel" required minlength="10" [ngClass]="{'is-invalid': clientPhone.errors && clientPhone.touched}">
+                        <div [hidden]="!clientPhone.errors?.required" class="invalid-feedback">
+                            Phone is required !
+                        </div>
+                        <div [hidden]="!clientPhone.errors?.minlength" class="invalid-feedback">
+                            Must be at least 10 characters !
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Balance</label>
+                        <input type="number" class="form-control" name="balance" [(ngModel)]="client.balance" #clientBalance="ngModel" required [ngClass]="{'is-invalid': clientBalance.errors && clientBalance.touched}">
+                        <div [hidden]="!clientBalance.errors?.required" class="invalid-feedback">
+                            Balance is required !
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-danger btn-block" [disabled]="!formClient.valid">Update</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
