@@ -12,6 +12,7 @@
 <div class="card">
     <div class="card-body">
         <h4 class="card-title"> List of clients</h4>
+        <input #query (keyup)="search(query.value)" type="text" class="form-conrol" placeholder="Search...">
 
         <table class="table table-striped">
             <thead>
@@ -23,7 +24,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let client of clients" (dblclick)="deleteClient(client.id)">
+                <tr *ngFor="let client of searchClients" (dblclick)="deleteClient(client.id)">
                     <td scope="row">{{ client.lastName }} {{ client.firstName }}</td>
                     <td>{{ client.phone }}</td>
                     <td>{{ client.balance | currency:'USD':'symbol'}}</td>

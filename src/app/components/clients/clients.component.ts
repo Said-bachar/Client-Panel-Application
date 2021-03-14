@@ -14,6 +14,7 @@ export class ClientsComponent implements OnInit {
   
   clients: Client[];
   total: number = 0;
+  searchClients: Client[];
   constructor(
      private clientService: ClientService,
      private authClientService: AuthClientService,
@@ -24,7 +25,7 @@ export class ClientsComponent implements OnInit {
   ngOnInit(): void {
     this.authClientService.getAuth().subscribe(auth => {
       this.clientService.getClients(auth.uid).subscribe(clients => {
-        this.clients = clients;
+        this.searchClients = this.clients = clients;
         this.total = this.getTotal();
      })
     });
@@ -61,6 +62,14 @@ export class ClientsComponent implements OnInit {
       
       } 
     })  
+  }
+
+  search(query: string) {
+     this.searchClients = (query) ? this.clients.filter(client => 
+      client.firstName.toLowerCase().includes(query.toLowerCase()) || 
+      client.lastName.toLowerCase().includes(query.toLowerCase()) || 
+      client.email.toLowerCase().includes(query.toLowerCase()) ||
+      client.phone.toString().includes(query)) : this.clients;
   }
 
 }
