@@ -1,6 +1,15 @@
 # ClientPanelAngular
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.3.
+***
+## Description
+  
+  A great Single Page Client Panel Application, it's a multi users application created with: 
+   * Angular 11 [Angular](https://angular.io/)
+   * Firebase & Firestore [Firebase Console](https://console.firebase.google.com/) 
+   * Bootstrap 4 [getbootstrap](https://getbootstrap.com/)
+   * Sweetalert2 [sweetalert2](http://sweetalert2.github.io/)
+   
 
 ## Development server
 
